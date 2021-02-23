@@ -1,0 +1,21 @@
+---
+   - name: copying ip & hostn names of ipa-server to /etc/hosts file
+     lineinfile:
+      path: /etc/hosts
+      line: '{{ server_ip }}    {{ server_hostname }}' 
+   - name: copying ip & hostn names of ipa-client to /etc/hosts file
+     lineinfile:
+      path: /etc/hosts
+      line: '{{ client_ip }}    {{ client_hostname }}'
+   - name: setting resolv.conf file
+     lineinfile:
+      path: /etc/resolv.conf
+      line: '{{ resolv_file }}  {{ server_ip }}'
+   - name: installing ipa-client packages......
+     yum: state=present name={{ item }}
+     with_items:
+     - ipa-client
+     - nss-pam-ldapd.i686
+     - pam_krb5
+   - name: Running the ipa-client-install command
+     command: ipa-client-install -U --domain={{ domain }} --server={{ server_hostname }} --realm={{ realm }} --password={{ kerberos_master_password }} --principal={{ principal_user }} --mkhomedir --no-dns-sshfp --hostname={{ client_hostname }} --no-ntp

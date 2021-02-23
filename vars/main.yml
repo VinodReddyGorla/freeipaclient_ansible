@@ -1,0 +1,13 @@
+---
+# vars file for freeipaclient
+server_hostname: ipa1.ipaserver1.com
+client_hostname: ipa2.ipaclient2.com
+domain: ipaserver1.com
+realm: IPASERVER1.COM
+kerberos_master_password: password
+directory_Server_password: password
+ipa_admin_password: password
+principal_user: admin
+server_ip: 192.168.32.79
+client_ip: 192.168.32.77
+resolv_file: nameserver

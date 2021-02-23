@@ -1,0 +1,6 @@
+---
+ - hosts: ipaclient
+   user: root
+   tasks:
+   roles:
+      - freeipaclient
